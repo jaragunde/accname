@@ -249,11 +249,11 @@
         <li id="step1">Set the <code>root node</code> to the given element, the <code>current node</code> to the <code>root node</code>, and the <code>total accumulated text</code> to the empty string (""). If the <code>root node</code>'s role prohibits naming, return the empty string ("").</li>
         <li id="step2">Compute the text alternative for the <code>current node</code>:
           <ol>
-            <li id="step2A">If the <code>current node</code> is <a class="termref">hidden</a> <strong>and is:
+            <li id="step2A">If the <code>current node</code> is <a class="termref">hidden</a> <strong>and is</strong>:
             <ul>
-              <li>Not</strong> directly referenced by <code>aria-labelledby</code> or <code>aria-describedby</code></li>
-              <li>Nor part of an <code>aria-labelledby</code> or <code>aria-describedby</code> traversal started in <a href="#step2B.ii.b">step 2B.ii.b<a>, where the target of that relation was hidden</li>
-              <li>Nor directly referenced by a native host language text alternative <a class="termref">element</a> (e.g. <code>label</code> in HTML) or <a class="termref">attribute</a></li>
+              <li><strong>Not</strong> directly referenced by <code>aria-labelledby</code> or <code>aria-describedby</code>.</li>
+              <li><strong>Nor</strong> part of an <code>aria-labelledby</code> or <code>aria-describedby</code> traversal started in <a href="#step2B.ii.b">step 2B.ii.b<a>, where the target of that relation was hidden.</li>
+              <li><strong>Nor</strong> directly referenced by a native host language text alternative <a class="termref">element</a> (e.g. <code>label</code> in HTML) or <a class="termref">attribute</a>.</li>
             </ul>
             Return the empty string.
               <div><details>
@@ -262,7 +262,8 @@
               </details></div>
               <div><details>
                 <summary>Example:</summary>
-                <p>The following example shows the meaning of the clause "Not part of an <code>aria-labelledby</code> or <code>aria-describedby</code> traversal started in <a href="#step2B.ii.b">step 2B.ii.b<a>, where the target of that relation was hidden". <code>element1</code>'s <a class="termref">accessible name</a> is "hello" because, although <code>element3</code> is hidden, it is part of an <code>aria-labelledby</code> traversal started in <code>element2</code>, which is hidden too.</p>
+                <p>The following examples show the meaning of the clause "Not part of an <code>aria-labelledby</code> or <code>aria-describedby</code> traversal started in <a href="#step2B.ii.b">step 2B.ii.b<a>, where the target of that relation was hidden".</p>
+                <p>First, <code>element1</code>'s <a class="termref">accessible name</a> is "hello" because, although <code>element3</code> is hidden, it is part of an <code>aria-labelledby</code> traversal started in <code>element2</code>, which is hidden too.</p>
                 <pre class="example highlight"><code>&lt;element1 id="el1" aria-labelledby="el2" /&gt;
 &lt;element2 id="el2" hidden&gt;
   &lt;element3 id="el3" hidden&gt; hello &lt;/element3&gt;
