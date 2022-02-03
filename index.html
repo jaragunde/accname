@@ -249,49 +249,33 @@
         <li id="step1">Set the <code>root node</code> to the given element, the <code>current node</code> to the <code>root node</code>, and the <code>total accumulated text</code> to the empty string (""). If the <code>root node</code>'s role prohibits naming, return the empty string ("").</li>
         <li id="step2">Compute the text alternative for the <code>current node</code>:
           <ol>
-            <li id="step2A">
-            <ol>
-              <li id="step2A.i">If the <code>current node</code> is <strong>not</strong> <a href="https://html.spec.whatwg.org/multipage/rendering.html#being-rendered">being rendered</a> <strong>and is</strong>:
-                <ul>
-                  <li><strong>Not</strong> directly referenced by <code>aria-labelledby</code> or <code>aria-describedby</code>.</li>
-                  <li><strong>Nor</strong> part of an <code>aria-labelledby</code> or <code>aria-describedby</code> traversal started in <a href="#step2B.ii.b">step 2B.ii.b<a>, where the target of that relation was hidden.</li>
-                  <li><strong>Nor</strong> directly referenced by a native host language text alternative <a class="termref">element</a> (e.g. <code>label</code> in HTML) or <a class="termref">attribute</a>.</li>
-                </ul>
-                Return the empty string.
-                  <div><details>
-                    <summary>Comment:</summary>
-                    <p>By default, <a class="termref">assistive technologies</a> do not relay hidden information, but an author can explicitly override that and include hidden text as part of the <a class="termref">accessible name</a> or <a class="termref">accessible description</a> by using <code>aria-labelledby</code> or <code>aria-describedby</code>. </p>
-                  </details></div>
-                  <div><details>
-                    <summary>Example:</summary>
-                    <p>The following examples show the meaning of the clause "Not part of an <code>aria-labelledby</code> or <code>aria-describedby</code> traversal started in <a href="#step2B.ii.b">step 2B.ii.b<a>, where the target of that relation was hidden".</p>
-                    <p>First, <code>element1</code>'s <a class="termref">accessible name</a> is "hello" because, although <code>element3</code> is hidden, it is part of an <code>aria-labelledby</code> traversal started in <code>element2</code>, which is hidden too.</p>
-                    <pre class="example highlight"><code>&lt;element1 id="el1" aria-labelledby="el2" /&gt;
+            <li id="step2A">If the <code>current node</code> is <a class="termref">hidden</a> <strong>and is</strong>:
+            <ul>
+              <li><strong>Not</strong> directly referenced by <code>aria-labelledby</code> or <code>aria-describedby</code>.</li>
+              <li><strong>Nor</strong> part of an <code>aria-labelledby</code> or <code>aria-describedby</code> traversal started in <a href="#step2B.ii.b">step 2B.ii.b<a>, where the target of that relation was hidden.</li>
+              <li><strong>Nor</strong> directly referenced by a native host language text alternative <a class="termref">element</a> (e.g. <code>label</code> in HTML) or <a class="termref">attribute</a>.</li>
+            </ul>
+            Return the empty string.
+              <div><details>
+                <summary>Comment:</summary>
+                <p>By default, <a class="termref">assistive technologies</a> do not relay hidden information, but an author can explicitly override that and include hidden text as part of the <a class="termref">accessible name</a> or <a class="termref">accessible description</a> by using <code>aria-labelledby</code> or <code>aria-describedby</code>. </p>
+              </details></div>
+              <div><details>
+                <summary>Example:</summary>
+                <p>The following examples show the meaning of the clause "Not part of an <code>aria-labelledby</code> or <code>aria-describedby</code> traversal started in <a href="#step2B.ii.b">step 2B.ii.b<a>, where the target of that relation was hidden".</p>
+                <p>First, <code>element1</code>'s <a class="termref">accessible name</a> is "hello" because, although <code>element3</code> is hidden, it is part of an <code>aria-labelledby</code> traversal started in <code>element2</code>, which is hidden too.</p>
+                <pre class="example highlight"><code>&lt;element1 id="el1" aria-labelledby="el2" /&gt;
 &lt;element2 id="el2" hidden&gt;
   &lt;element3 id="el3" hidden&gt; hello &lt;/element3&gt;
 &lt;/element2&gt;</code>
-                    </pre>
-                    <p>Alternatively, <code>element1</code> has no <a class="termref">accessible name</a> if <code>element3</code> is hidden and it is part of an <code>aria-labelledby</code> traversal started in <code>element2</code>, but <code>element2</code> is not hidden.</p>
-                    <pre class="example highlight"><code>&lt;element1 id="el1" aria-labelledby="el2" /&gt;
+                </pre>
+                <p>Alternatively, <code>element1</code> has no <a class="termref">accessible name</a> if <code>element3</code> is hidden and it is part of an <code>aria-labelledby</code> traversal started in <code>element2</code>, but <code>element2</code> is not hidden.</p>
+                <pre class="example highlight"><code>&lt;element1 id="el1" aria-labelledby="el2" /&gt;
 &lt;element2 id="el2"&gt;
   &lt;element3 id="el3" hidden&gt; hello &lt;/element3&gt;
 &lt;/element2&gt;</code>
-                    </pre>
-                  </details></div>
-                </li>
-              <li id="step2A.ii">If the <code>current node</code> has the <code>aria-hidden</code> property set to true, return the empty string.
-                  <div><details>
-                    <summary>Example:</summary>
-                    <p>The following example shows the interaction of the clauses in step 2A.i and step 2A.ii:</p>
-                    <p><code>element1</code>'s <a class="termref">accessible name</a> is "hello". <code>element4</code> does not contribute to the accessible name because its  <code>aria-hidden</code> attribute is true.</p>
-                    <pre class="example highlight"><code>&lt;element1 id="el1" aria-labelledby="el2" /&gt;
-&lt;element2 id="el2" hidden&gt;
-  &lt;element3 id="el3" hidden&gt; hello &lt;/element3&gt;
-  &lt;element4 id="el4" aria-hidden="true"&gt; goodbye &lt;/element3&gt;
-&lt;/element2&gt;</code>
-                    </pre>
-                  </details></div>
-              </ol>
+                </pre>
+              </details></div>
             </li>
             <li id="step2B">Otherwise:
               <ul>
