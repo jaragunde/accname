@@ -251,8 +251,7 @@
           <ol>
             <li id="step2A">If the <code>current node</code> is <a class="termref">hidden</a> <strong>and is</strong>:
             <ul>
-              <li><strong>Not</strong> directly referenced by <code>aria-labelledby</code> or <code>aria-describedby</code>.</li>
-              <li><strong>Nor</strong> part of an <code>aria-labelledby</code> or <code>aria-describedby</code> traversal started in <a href="#step2B.ii.b">step 2B.ii.b<a>, where the target of that relation was hidden.</li>
+              <li><strong>Not</strong> part of an <code>aria-labelledby</code> or <code>aria-describedby</code> traversal, where the node directy referenced by that relation was hidden.</li>
               <li><strong>Nor</strong> directly referenced by a native host language text alternative <a class="termref">element</a> (e.g. <code>label</code> in HTML) or <a class="termref">attribute</a>.</li>
             </ul>
             Return the empty string.
@@ -262,7 +261,7 @@
               </details></div>
               <div><details>
                 <summary>Example:</summary>
-                <p>The following examples show the meaning of the clause "Not part of an <code>aria-labelledby</code> or <code>aria-describedby</code> traversal started in <a href="#step2B.ii.b">step 2B.ii.b<a>, where the target of that relation was hidden".</p>
+                <p>The following examples show the meaning of the clause "Not part of an <code>aria-labelledby</code> or <code>aria-describedby</code> traversal, where the node directy referenced by that relation was hidden.".</p>
                 <p>First, <code>element1</code>'s <a class="termref">accessible name</a> is "hello" because, although <code>element3</code> is hidden, it is part of an <code>aria-labelledby</code> traversal started in <code>element2</code>, which is hidden too.</p>
                 <pre class="example highlight"><code>&lt;element1 id="el1" aria-labelledby="el2" /&gt;
 &lt;element2 id="el2" hidden&gt;
@@ -294,6 +293,9 @@
                   </ol>
                 </li>
               </ul>
+              <div><details>
+                <summary>Comment:</summary>
+                <p>The result of <a href="#step2B.ii.b">step 2B.ii.b<a> in combination with <a href="#step2A">step 2A<a> means that <a class="termref">user agents</a> MUST include any hidden nodes as part of the <a class="termref">accessible name</a> or <a class="termref">accessible description</a> when traversing an <code>aria-labelledby</code> or <code>aria-describedby</code> relation and the referenced node is hidden.</p>
               <div><details>
                 <summary>Example:</summary>
                 <p>The following example shows the meaning of the clause "&#8230; and the <code>current node</code> is not already part of an <code>aria-labelledby</code> traversal &#8230;" .</p>
