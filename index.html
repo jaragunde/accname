@@ -263,15 +263,15 @@
                 <summary>Example:</summary>
                 <p>The following examples show the meaning of the clause "Not part of an <code>aria-labelledby</code> or <code>aria-describedby</code> traversal, where the node directy referenced by that relation was hidden.".</p>
                 <p>First, <code>element1</code>'s <a class="termref">accessible name</a> is "hello" because, although <code>element3</code> is hidden, it is part of an <code>aria-labelledby</code> traversal started in <code>element2</code>, which is hidden too.</p>
-                <pre class="example highlight"><code>&lt;element1 id="el1" aria-labelledby="el2" /&gt;
-&lt;element2 id="el2" hidden&gt;
-  &lt;element3 id="el3" hidden&gt; hello &lt;/element3&gt;
+                <pre class="example highlight"><code>&lt;element1 id="el1" role="button" aria-labelledby="el2" /&gt;
+&lt;element2 id="el2" class="hidden"&gt;
+  &lt;element3 id="el3" class="hidden"&gt;hello&lt;/element3&gt;
 &lt;/element2&gt;</code>
                 </pre>
                 <p>Alternatively, <code>element1</code> has no <a class="termref">accessible name</a> if <code>element3</code> is hidden and it is part of an <code>aria-labelledby</code> traversal started in <code>element2</code>, but <code>element2</code> is not hidden.</p>
-                <pre class="example highlight"><code>&lt;element1 id="el1" aria-labelledby="el2" /&gt;
+                <pre class="example highlight"><code>&lt;element1 id="el1" role="button" aria-labelledby="el2" /&gt;
 &lt;element2 id="el2"&gt;
-  &lt;element3 id="el3" hidden&gt; hello &lt;/element3&gt;
+  &lt;element3 id="el3" class="hidden"&gt;hello&lt;/element3&gt;
 &lt;/element2&gt;</code>
                 </pre>
               </details></div>
