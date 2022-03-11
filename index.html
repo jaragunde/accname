@@ -257,6 +257,16 @@
             Return the empty string.
               <div><details>
                 <summary>Comment:</summary>
+                <p>It's important to clarify the broad definition of hidden for the purposes of accessible name calculation:
+                <ul>
+                  <li>Nodes with CSS properties <code>display:none</code>, <code>visibility:hidden</code>, <code>visibility:collapse</code> or <code>content-visibility:hidden</code>: They are considered hidden, as they match the guidelines "not perceivable" and "explicitly hidden".</li>
+                  <li>Nodes with CSS properties <code>opacity:0</code> or <code>filter:opacity(0%)</code>, or similar SVG mechanisms: They are not considered hidden. Text hidden with these methods can still be selected or copied, and user agents still expose it in their accessibility trees.</li>
+                  <li>Nodes with the <code>aria-hidden="true"</code> property: it is considered hidden, matching the "explicitly hidden" guideline.</li>
+                  <li>Nodes hidden off screen or behind another object: they are not considered hidden. They are exposed in the accessibility tree and they can even name on-screen objects.</li>
+                </ul></p>
+              </details></div>
+              <div><details>
+                <summary>Comment:</summary>
                 <p>By default, <a class="termref">assistive technologies</a> do not relay hidden information, but an author can explicitly override that and include hidden text as part of the <a class="termref">accessible name</a> or <a class="termref">accessible description</a> by using <code>aria-labelledby</code> or <code>aria-describedby</code>. </p>
               </details></div>
               <div><details>
